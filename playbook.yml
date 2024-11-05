@@ -1,0 +1,19 @@
+---
+- name: Wait for connection and display OS details
+  hosts: all
+  tasks:
+    - name: Wait for the connection to be established
+      wait_for_connection:
+        timeout: 60
+
+    - name: Gather OS details
+      setup:
+        filter: ansible_distribution*
+
+    - name: Display OS distribution
+      debug:
+        msg: "OS Distribution: {{ ansible_distribution }}"
+
+    - name: Display OS version
+      debug:
+        msg: "OS Version: {{ ansible_distribution_version }}"
