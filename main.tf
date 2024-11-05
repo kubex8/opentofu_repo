@@ -29,21 +29,21 @@ resource "libvirt_domain" "fedora_vm" {
   memory = 2048
   vcpu   = 2
 
-  # Disk konfigurace pro VM
+  # Disk configuration for VM
   disk {
     volume_id = libvirt_volume.fedora-qcow2.id
   }
 
-  # Nastavení sítě pro VM s pevně zadanou IP adresou
+  # Network settings for VM with a static IP address
   network_interface {
     network_name = "default"
-    addresses = ["192.168.122.10"]  # Použijte požadovanou IP adresu
+    addresses = ["192.168.122.10"]  # Use the desired IP address
   }
 
-  # Připojení cloud-init disku
+  # Attach the cloud-init disk
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
-  # Volitelné nastavení konzole a grafiky
+  # Optional console and graphics settings
   console {
     type        = "pty"
     target_port = "0"
